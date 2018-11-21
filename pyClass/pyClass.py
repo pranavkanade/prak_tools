@@ -7,6 +7,7 @@ class Class:
     This class assumes that we only have one single class
     in the file(filename) passed to the constructor
     """
+
     def __init__(self, filename):
         self.filename = filename
         self.exists = os.path.exists(self.filename)
@@ -43,8 +44,8 @@ class Class:
 
     def get_attributes(self, attrStr):
         return (attrStr.replace(' ', '')
-            .replace("\n", '')
-            .split(','))
+                .replace("\n", '')
+                .split(','))
 
     def get_classes(self, force=False):
         CLASS = 'class ([\w]+)\(?([\w,\s]*)\)?:'
@@ -60,11 +61,14 @@ class Class:
                 self.classes_contained.append(class_sig_dict)
             # Assuming there is only one class in the file
             if len(self.classes_contained) != 1:
-                print("Error: There are two classes in a single file. Please update the code. Please contact Pranav Kanade.")
+                print(
+                    "Error: There are two classes in a single file. Please update the code. Please contact Pranav Kanade.")
                 print("Ommiting collection of functions")
             else:
-                self.classes_contained[0]["methods"] = self.get_functions(force)
-                self.classes_contained[0]["properties"] = self.get_properties(force)
+                self.classes_contained[0]["methods"] = self.get_functions(
+                    force)
+                self.classes_contained[0]["properties"] = self.get_properties(
+                    force)
         return self.classes_contained
 
     def get_functions(self, force=False):
@@ -94,7 +98,8 @@ class Class:
             PROP = "(self\.[\w]+)"
             for match in re.finditer(PROP, self.file_as_string):
                 self.__property_set.add(match.group(1))
-        self.__property_set = self.__property_set.difference(self.__function_set)
+        self.__property_set = self.__property_set.difference(
+            self.__function_set)
         return list(self.__property_set)
 
     # TODO: Add function to get the imports
