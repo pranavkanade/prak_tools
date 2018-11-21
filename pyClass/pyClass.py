@@ -1,8 +1,5 @@
 import os
 import re
-from pprint import pprint
-from config import config
-
 
 
 class Class:
@@ -98,8 +95,8 @@ class Class:
             for match in re.finditer(PROP, self.file_as_string):
                 self.__property_set.add(match.group(1))
         self.__property_set = self.__property_set.difference(self.__function_set)
-        return (self.__property_set)
+        return list(self.__property_set)
 
-if __name__ == "__main__":
-    class_apdReport = Class(config.apdReport)
-    pprint(class_apdReport.get_classes())
+    # TODO: Add function to get the imports
+    # TODO: Find a way to represent coupling between two classes
+    # TODO: Find the Coupling between current and imported classes
