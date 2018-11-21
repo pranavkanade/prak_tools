@@ -42,6 +42,11 @@ class Class:
         else:
             self.file_as_string = ''
 
+    def get_as_string(self):
+        if self.file_as_string is None:
+            self.read_as_string()
+        return self.file_as_string
+
     def get_attributes(self, attrStr):
         return (attrStr.replace(' ', '')
                 .replace("\n", '')
